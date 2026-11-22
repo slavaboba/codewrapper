@@ -19,6 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
         const choice = await vscode.window.showQuickPick(['if', 'for', 'while'], {
             placeHolder: 'Выберите конструкцию для обертывания'
         });
+
         if (!choice){
             return;
         }
@@ -26,13 +27,16 @@ export function activate(context: vscode.ExtensionContext) {
         // 2. Спрашиваем условие/заголовок цикла
         let promptText = '';
         let defaultVal = '';
+
         if (choice === 'if') {
             promptText = 'Введите условие для if';
             defaultVal = 'condition';
-        } else if (choice === 'for') {
+        } 
+        if (choice === 'for') {
             promptText = 'Введите заголовок для for';
             defaultVal = 'let i = 0; i < n; i++';
-        } else if (choice === 'while') {
+        } 
+        if (choice === 'while') {
             promptText = 'Введите условие для while';
             defaultVal = 'condition';
         }
@@ -41,6 +45,7 @@ export function activate(context: vscode.ExtensionContext) {
             prompt: promptText,
             value: defaultVal
         });
+        
         if (!param){
             return;
         }
@@ -63,15 +68,15 @@ export function activate(context: vscode.ExtensionContext) {
         // Добавляем один уровень отступа к каждой строке выделенного текста
         // Разбиваем текст на строки и добавляем отступ
         const lines = selectedText.split('\n');
-        const indentedLines = lines.map((l, index) => {
+        const indentedLines = lines.map((l) => {
             // Если это первая строка, мы её не трогаем (она уже имеет отступ в редакторе),
             // но так как мы заменяем выделение, нам нужно применить отступ ко всем строкам.
             // Если строка пустая, не добавляем отступ
-            return l.trim() === '' ? '' : indentChar + l;
+            return indentChar + l;
         });
 
         // 4. Формируем итоговый код
-        let newCode = `${choice} (${param}) {\n`;
+        let newCode = baseIndent + `${choice} (${param}) {\n`;
         newCode += indentedLines.join('\n') + '\n';
         newCode += baseIndent + '}'; // Закрывающая скобка на уровне базового отступа
 
