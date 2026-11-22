@@ -14,10 +14,19 @@
   "contributes": {
     "commands": [
         {
-            "command": "codewrapper.wrap",
-            "title": "Обернуть в if"
+            "command": "code-wrapper.wrapCode",
+            "title": "Обернуть код (if/for/while)"
         }
-    ]
+    ],
+    "menus": {
+        "editor/context": [
+            {
+                "command": "code-wrapper.wrapCode",
+                "group": "navigation",
+                "when": "editorHasSelection"
+            }
+        ]
+    }
 },
   "scripts": {
     "vscode:prepublish": "npm run compile",
