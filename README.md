@@ -1,71 +1,26 @@
-# codewrapper README
+# CodeWrapper - Плагин для Visual Studio Code
 
-This is the README for your extension "codewrapper". After writing up a brief description, we recommend including the following sections.
+**Автор:** Марудин Святослав Павлович
+**Группа:** М3103
 
-## Features
+## Описание
+Плагин **CodeWrapper** предназначен для быстрого и удобного оборачивания выделенного блока кода в базовые управляющие конструкции (`if`, `for`, `while`). 
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+В отличие от простых сниппетов, плагин обладает встроенной логикой анализа исходного кода: он автоматически определяет текущий уровень отступа выделенного фрагмента и сохраняет его, добавляя необходимый уровень вложенности для тела конструкции.
 
-For example if there is an image subfolder under your extension project workspace:
+## Возможности
+- Обертывание кода в `if`, `for`, `while` через палитру команд или контекстное меню.
+- Интерактивный диалог выбора конструкции.
+- Ввод условия (для `if`, `while`) или заголовка (для `for`) во всплывающем окне.
+- **Умное форматирование:** сохранение исходных табов/пробелов, автоматическое добавление одного уровня отступа для тела и выравнивание закрывающей скобки `}`.
+- Игнорирование пустых строк при добавлении отступов.
 
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+## Как пользоваться
+1. Откройте файл с кодом в VS Code.
+2. Выделите фрагмент кода, который нужно обернуть.
+3. Вызовите команду одним из способов:
+   - Нажмите `Ctrl+Shift+P` и введите **"Обернуть код (if/for/while)"**.
+   - Нажмите правой кнопкой мыши на выделенном тексте и выберите пункт в контекстном меню.
+4. В появившемся списке выберите нужную конструкцию (`if`, `for` или `while`).
+5. Введите условие или заголовок цикла (например, `x > 0` или `int i = 0; i < 10; i++`).
+6. Нажмите Enter. Код будет автоматически обернут!
