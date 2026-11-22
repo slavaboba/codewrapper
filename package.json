@@ -13,12 +13,12 @@
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
-      {
-        "command": "codewrapper.helloWorld",
-        "title": "Hello World"
-      }
+        {
+            "command": "codewrapper.wrap",
+            "title": "Обернуть в if"
+        }
     ]
-  },
+},
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",

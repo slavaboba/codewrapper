@@ -1,26 +1,46 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+    // Регистрируем команду, которая появится в палитре команд (Ctrl+Shift+P)
+    let disposable = vscode.commands.registerCommand('codewrapper.wrap', async () => {
+        const editor = vscode.window.activeTextEditor;
+        
+        // Если редактор не открыт, выходим
+        if (!editor) {
+            vscode.window.showErrorMessage('Откройте файл с кодом!');
+            return;
+        }
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "codewrapper" is now active!');
+        // Получаем выделенный пользователем текст
+        const selection = editor.selection;
+        const selectedText = editor.document.getText(selection);
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('codewrapper.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from CodeWrapper!');
-	});
+        if (!selectedText) {
+            vscode.window.showInformationMessage('Выделите код, который нужно обернуть.');
+            return;
+        }
 
-	context.subscriptions.push(disposable);
+        // Спрашиваем у пользователя условие (например, "x > 0")
+        const condition = await vscode.window.showInputBox({
+            prompt: 'Введите условие для if',
+            placeHolder: 'например: x > 0'
+        });
+
+        if (!condition){
+			return; 
+		}// Пользователь нажал Esc
+
+        // Формируем новый код
+        // (Для простоты берем стандартный отступ, но в идеале его можно вычислять)
+        const newCode = `if (${condition}) {\n${selectedText}\n}`;
+
+        // Заменяем выделенный текст на новый
+        await editor.edit(editBuilder => {
+            editBuilder.replace(selection, newCode);
+        });
+    });
+
+    context.subscriptions.push(disposable);
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}
